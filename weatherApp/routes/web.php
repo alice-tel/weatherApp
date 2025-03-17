@@ -13,7 +13,11 @@ Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 
 
 //Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
-Route::get('/register', function(){return('register test');})->name('show.register');
+Route::get('/register', function()
+{
+    echo '/register called';
+    return('register test');
+})->name('show.register');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');
