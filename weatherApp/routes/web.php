@@ -24,3 +24,10 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+
+//
+//Route::get('/register', function()
+//{
+//    echo '/register called';
+//    return 'register test';
+//})->name('show.register');
