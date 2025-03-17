@@ -19,10 +19,10 @@
                     <a class="nav-link" href="{{ route('weather.index') }}">Latest Data</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show.register') }}">Register</a>
+                    <a class="nav-link" href="{{ route('auth.register') }}">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show.login') }}">Login</a>
+                    <a class="nav-link" href="{{ route('auth.login') }}">Login</a>
                 </li>
             </ul>
         </div>
