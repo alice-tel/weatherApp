@@ -23,6 +23,7 @@ class WeatherViewController extends Controller
         return view('weather.index', compact('latestMeasurements'));
     }
 
+
     public function station($stationName)
     {
         $station = Station::where('name', $stationName)->firstOrFail();
@@ -93,5 +94,15 @@ class WeatherViewController extends Controller
         if (substr($conditions, 5, 1) === '1') $formatted[] = 'Tornado';
 
         return count($formatted) > 0 ? implode(', ', $formatted) : 'None';
+    }
+
+    public function loginPagina()
+    {
+        return view('weather.loginOefenen');
+    }
+
+    public function home()
+    {
+        return view('home');
     }
 }
