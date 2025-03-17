@@ -11,9 +11,10 @@ Route::get('weather/station/{name}', [WeatherViewController::class, 'stations'])
 Route::get('weather/login', [WeatherViewController::class, 'loginPagina'])->name('weather.loginOefenen');
 Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
-Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
-
+Route::middleware(['web'])->group(function () {
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
+});
 //Route::get( 'weather/login')->name('weather.loginOefenen');
 
 require __DIR__.'/settings.php';
