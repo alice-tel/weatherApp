@@ -21,7 +21,7 @@ class Measurement extends Model
         'air_pressure_sea_level',
         'visibility',
         'wind_speed',
-        'percipation',
+        'precipitation',
         'snow_depth',
         'conditions',
         'cloud_cover',

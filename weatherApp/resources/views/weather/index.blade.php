@@ -45,7 +45,7 @@
                                     <td>{{ $measurement->wind_direction ?? 'N/A' }}</td>
                                     <td>{{ $measurement->visibility ?? 'N/A' }}</td>
                                     <td>{{ $measurement->cloud_cover ?? 'N/A' }}</td>
-                                    <td>{{ $measurement->percipation ?? 'N/A' }}</td>
+                                    <td>{{ $measurement->precipitation ?? 'N/A' }}</td>
                                     <td>
                                         @if($measurement->originalMeasurement)
                                             @if($measurement->originalMeasurement->missing_field)
