@@ -13,11 +13,16 @@ Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
+Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');
+
+Route::get('/about', function () {
+    return view('about');
+});
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
