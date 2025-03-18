@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RegisterUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -23,14 +24,14 @@ class AuthController extends Controller
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique|max:255',
-            'employee_code' => 'required|string|unique|min:4|max:4',
+            'email' => 'required|email|unique:register_users|max:255',
+            'employee_code' => 'required|string|unique:register_users|min:4|max:4',
             'user_role' => 'required|int',
             'password' => 'required|string|min:8|max:16',
         ]);
 
         $user = RegisterUser::create($validated);
-        Auth::login($user);
+//        Auth::login($user);
         return redirect()->route('home');
 
     }
