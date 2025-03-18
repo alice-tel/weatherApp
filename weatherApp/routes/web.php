@@ -12,8 +12,8 @@ Route::get('weather/login', [WeatherViewController::class, 'loginPagina'])->name
 Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.register');
-Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.login');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');
 
