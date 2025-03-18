@@ -1,8 +1,10 @@
-
-
 @extends('layouts.app')
 
 @section('content')
 
-    <p> heb ik down of niet???</p>
+    <div>
+        <h1 class="text-center">Welcome to IWA Weather</h1>
+
+        <p>Informatie van 6000 weerstations!</p>
+    </div>
 @endsection
