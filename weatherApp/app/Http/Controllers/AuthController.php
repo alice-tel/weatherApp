@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\RegisterUser;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,17 +28,17 @@ class AuthController extends Controller
     public function Register(Request $request){
 //        $validated =
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:register_users|max:255',
-            'employee_code' => 'required|string|unique:register_users|min:4|max:4',
+            'first_name' => 'required|string|max:45',
+            'last_name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users|max:100',
+            'employee_code' => 'string|min:10|max:10',
             'user_role' => 'required|int',
             'password' => 'required|string|min:8|max:16',
         ]);
 
-        $user = RegisterUser::create([
+        $user = User::create([
             'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'name' => $request->last_name,
             'email' => $request->email,
             'employee_code' => $request->employee_code,
             'user_role' => $request->user_role,
