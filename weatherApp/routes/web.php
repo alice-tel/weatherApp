@@ -16,7 +16,7 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('show.reg
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // post because this is a button that only sends the logout request
 
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');
