@@ -16,6 +16,8 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('show.reg
 Route::post('/register', [AuthController::class, 'Register'])->name('register');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
+Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
+
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');
 

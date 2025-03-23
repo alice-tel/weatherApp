@@ -18,6 +18,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('weather.index') }}">Latest Data</a>
                 </li>
+                @auth {{-- only visable when logged in (still in testingphase) --}}
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="btn" >Logout</button>
+                        </form>
+                    </li>
+                @endauth
                 @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('show.register') }}">Register</a>
