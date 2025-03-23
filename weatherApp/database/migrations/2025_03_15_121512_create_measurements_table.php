@@ -22,7 +22,7 @@ return new class extends Migration
             $table->float('air_pressure_sea_level')->nullable();
             $table->float('visibility')->nullable();
             $table->float('wind_speed')->nullable();
-            $table->float('percipation')->nullable();
+            $table->float('precipitation')->nullable();
             $table->float('snow_depth')->nullable();
             $table->string('conditions', 6)->nullable();
             $table->float('cloud_cover')->nullable();

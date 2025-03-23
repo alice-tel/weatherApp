@@ -46,8 +46,8 @@
                             <p><strong>Cloud Cover:</strong> <span class="station-clouds">{{ $measurement->cloud_cover }}</span>%</p>
                         @endif
 
-                        @if($measurement->percipation !== null)
-                            <p><strong>Precipitation:</strong> <span class="station-precipitation">{{ $measurement->percipation }}</span> mm</p>
+                        @if($measurement->precipitation !== null)
+                            <p><strong>Precipitation:</strong> <span class="station-precipitation">{{ $measurement->precipitation }}</span> mm</p>
                         @endif
 
                         @if($measurement->conditions !== null)
@@ -170,8 +170,8 @@
                         stationCard.querySelector('.station-clouds').textContent = station.cloud_cover;
                     }
 
-                    if (station.percipation !== null) {
-                        stationCard.querySelector('.station-precipitation').textContent = station.percipation;
+                    if (station.precipitation !== null) {
+                        stationCard.querySelector('.station-precipitation').textContent = station.precipitation;
                     }
 
                     stationCard.querySelector('.station-conditions').textContent = station.conditions;

@@ -71,7 +71,7 @@ class WeatherViewController extends Controller
                 'wind_speed' => $measurement->wind_speed,
                 'wind_direction' => $measurement->wind_direction,
                 'cloud_cover' => $measurement->cloud_cover,
-                'percipation' => $measurement->percipation,
+                'precipitation' => $measurement->precipitation,
                 'conditions' => $this->formatConditions($measurement->conditions),
                 'has_issues' => $measurement->originalMeasurement ? true : false,
                 'station_url' => route('weather.station', $measurement->station)
