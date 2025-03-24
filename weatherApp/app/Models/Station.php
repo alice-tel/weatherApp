@@ -25,4 +25,18 @@ class Station extends Model
     {
         return $this->hasMany(Measurement::class, 'station', 'name');
     }
+    public function geolocation()
+    {
+        return $this->hasOne(Geolocation::class, 'station_name', 'name');
+    }
+
+    public function nearestLocation()
+    {
+        return $this->hasOne(NearestLocation::class, 'station_name', 'name');
+    }
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class, 'subscription_station', 'station', 'subscription');
+    }
 }
