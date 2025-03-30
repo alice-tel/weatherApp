@@ -21,7 +21,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-ublic function down(): void
+public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['user_role']); // Drop the foreign key first

@@ -62,6 +62,8 @@ class AuthController extends Controller
 
         request()->session()->regenerate();
 
+        session(['user_role' => Auth::user()->user_role]);
+
         return redirect()->route('home');
     }
 
