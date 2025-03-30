@@ -20,7 +20,7 @@ Route::post('/login', [AuthController::class, 'Login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // post because this is a button that only sends the logout request
 
 Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::get('/administrator/superAdminPage', [AdminController::class, 'index'])->name('admin Panel');
+    Route::get('/administrator/superAdminPage', [AdminController::class, 'index'])->name('administrator.superAdminPage');
 });
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');

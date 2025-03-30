@@ -37,7 +37,7 @@
             </ul>
             <ul> {{-- dit is een poging om nav items uit een array te kunnen injecten --}}
                 @foreach ($navItems ?? [] as $item)
-                    <li><a href="#">{{ $item }}</a></li>
+                    <li><a href="{{ route($item['route']) }}">{{ $item['label'] }}</a></li>
                 @endforeach
             </ul>
 
