@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use App\Services\RoleViewManagement; //role viewer importje
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
 
                 return count($formatted) > 0 ? implode(', ', $formatted) : 'None';
             });
+        });
+
+        View::composer('layouts.app', function ($view) {
+            if (auth()->check()) {
+                $role = auth()->user()->user_role;
+                $navItems = app(RoleViewManagement::class)->getNavItems($role);
+                $view->with('navItems', $navItems);
+            }
         });
     }
 }
