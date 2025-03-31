@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WeatherDataController;
 use App\Http\Controllers\WeatherViewController;
@@ -19,9 +20,14 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // post because this is a button that only sends the logout request
 
-Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::get('/administrator/superAdminPage', [AdminController::class, 'index'])->name('administrator.superAdminPage');
+Route::middleware(['auth', 'checkrole:1'])->group(function () {
+    Route::get('/administrator/superAdminPage', [AdminController::class, 'adminIndex'])
+        ->name('administrator.superAdminPage');
 });
+
+
+
+
 
 //Route::get( 'weather/login')->name('weather.loginOefenen');
 

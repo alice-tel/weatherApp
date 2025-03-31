@@ -40,8 +40,11 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('layouts.app', function ($view) {
             $userRole = Auth::check() ? Auth::user()->user_role : null;
+
             $navItems = RoleViewManagement::getNavItems($userRole);
+
             $view->with('navItems', $navItems);
         });
+
     }
 }

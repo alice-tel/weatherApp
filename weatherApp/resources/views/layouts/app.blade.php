@@ -18,17 +18,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('weather.index') }}">Latest Data</a>
                 </li>
-                @auth {{-- only visable when logged in (WORKS!) --}}
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger" >Logout</button>
-                        </form>
-                    </li>
-                @endauth
+
                 @foreach ($navItems ?? [] as $item)
-                    <li><a href="{{ route($item['route']) }}">{{ $item['label'] }}</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route($item['route']) }}">{{ $item['label'] }}</a>
+                    </li>
                 @endforeach
+
+                @auth {{-- only visable when logged in (WORKS!) --}}
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger" >Logout</button>
+                    </form>
+                </li>
+                @endauth
                 @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('show.register') }}">Register</a>
