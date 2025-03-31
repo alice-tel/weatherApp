@@ -69,6 +69,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+
         Auth::logout(); //auth carries the hard work yippie :D
         $request->session()->invalidate();//Make all unsaved changes invalid, for example a half filled in form
         $request->session()->regenerateToken(); //new token
