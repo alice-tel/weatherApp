@@ -4,7 +4,7 @@ namespace App\Services;
 
 class RoleViewManagement {
     public static function getNavItems($userRole) {
-        dump($userRole + "in nav items");
+//        dump($userRole , "in nav items");
 
         $roles = [
             1 => [ // Admin
