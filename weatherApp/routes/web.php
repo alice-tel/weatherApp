@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/weather', [WeatherViewController::class, 'index'])->name('weather.index');
 Route::get('weather/dashboard', [WeatherViewController::class, 'dashboard'])->name('weather.dashboard');
-Route::get('weather/station/{name}', [WeatherViewController::class, 'stations'])->name('weather.station');
+Route::get('weather/station/{name}', [WeatherViewController::class, 'station'])->name('weather.station');
 Route::get('weather/login', [WeatherViewController::class, 'loginPagina'])->name('weather.loginOefenen');
 Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 

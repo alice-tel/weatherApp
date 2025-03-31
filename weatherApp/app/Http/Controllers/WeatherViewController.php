@@ -29,11 +29,14 @@ class WeatherViewController extends Controller
         $station = Station::where('name', $stationName)->firstOrFail();
 
         $measurements = Measurement::where('station', $stationName)
+            ->with('originalMeasurement')
             ->orderBy('date', 'desc')
             ->orderBy('time', 'desc')
             ->paginate(25);
 
-        return view('weather.station', compact('station', 'measurements'));
+        $formattedMeasurements = $this->formatConditions($measurements);
+
+        return view('weather.station', compact('station', 'measurements', 'formattedMeasurements'));
     }
 
     public function dashboard()
