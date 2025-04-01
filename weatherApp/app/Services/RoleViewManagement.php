@@ -4,14 +4,17 @@ namespace App\Services;
 
 class RoleViewManagement {
     public static function getNavItems($userRole) {
+        if (!isset($userRole) || $userRole === '') {// more bebugging
+            return [];
+        }
+
         $roles = [
             1 => [ // Admin
                 ['route' => 'administrator.superAdminPage', 'label' => 'Admin Panel'],
-
             ],
-
         ];
 
-        return $roles[$userRole] ?? []; // user_role kan op t moment ook null zijn.
+        return $roles[$userRole] ?? []; // Ensure safe access
     }
+
 }
