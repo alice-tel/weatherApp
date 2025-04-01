@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('role', 45);
             $table->string('description', 256)->nullable();
         });
@@ -21,8 +21,12 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+public function down(): void
     {
-        Schema::dropIfExists('user_roles');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['user_role']); // Drop the foreign key first
+        });
+
+        Schema::dropIfExists('user_roles'); // Now, drop the table safely
     }
 };
