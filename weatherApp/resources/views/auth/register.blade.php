@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{--TO DO: password needs to be password type, make info stay on refresh--}}
 @section('content')
     <form method="POST" action="/register">
         @csrf
