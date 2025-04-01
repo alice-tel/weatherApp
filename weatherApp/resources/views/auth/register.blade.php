@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{--TODO: allow input to stay on refresh, make role integer dropdown--}}
 @section('content')
     <form method="POST" action="/register">
         @csrf
@@ -39,8 +39,12 @@
                         <x-form-label for="user_role">User Role</x-form-label>
 
                         <div class="mt-2">
-                            <x-form-input name="user_role" id="user_role" required />
-
+                            <select name="user_role" id="user_role" required>
+                                <option value=1>Admin</option>
+                                <option value=2>Technische medewerker</option>
+                                <option value=3>Technische onderzoeker</option>
+                                <option value=4>Commercieel medewerker</option>
+                            </select>
                             <x-form-error name="user_role" />
                         </div>
                     </x-form-field>
