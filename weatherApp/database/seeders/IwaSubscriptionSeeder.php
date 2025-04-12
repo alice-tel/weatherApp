@@ -26,5 +26,7 @@ class IwaSubscriptionSeeder extends Seeder
             'coordinates' => json_encode(['lat_min' => 51.0, 'lat_max' => 52.0, 'long_min' => -1.0, 'long_max' => 0.0]),
             'regions' => json_encode(['UK-ENG']),
         ]);
+
+        //nep query vraagding kan zijn: $queries = IwaSubscriptionQuery::where('contract_identifier', 'contract123')->get();
     }
 }
