@@ -11,7 +11,7 @@ class IwaSubscriptionQuery extends Model
 
     protected $table = 'iwa_subscription_query';
 
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'query_id',
