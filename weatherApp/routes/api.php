@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IwaApiController;
 use App\Http\Controllers\WeatherDataController;
 use App\Http\Controllers\WeatherViewController;
 use Illuminate\Http\Request;
@@ -12,3 +13,5 @@ Route::get('/user', function (Request $request) {
 Route::post('/weather-data', [WeatherDataController::class, 'store']);
 
 Route::get('/dashboard/latest', [WeatherViewController::class, 'latestData']);
+
+Route::get('/IwaApi', [IwaApiController::class, 'IwaData']);
