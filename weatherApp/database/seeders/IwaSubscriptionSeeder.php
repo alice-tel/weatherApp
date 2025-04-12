@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Iwa;
+use App\Models\IwaSubscriptionQuery;
 
 class IwaSubscriptionSeeder extends Seeder
 {
     public function run()
     {
-        QueryCriteria::create([
+        IwaSubscriptionQuery::create([
             'query_id' => 'query001',
             'contract_identifier' => 'contract123',
             'landcodes' => json_encode(['NL', 'BE']),
@@ -18,7 +18,7 @@ class IwaSubscriptionSeeder extends Seeder
             'regions' => json_encode(['NL-FR', 'BE-VL']),
         ]);
 
-        QueryCriteria::create([
+        IwaSubscriptionQuery::create([
             'query_id' => 'query002',
             'contract_identifier' => 'contract456',
             'landcodes' => json_encode(['UK']),
