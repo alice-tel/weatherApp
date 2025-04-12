@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Measurement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IwaApiController extends Controller
 {
     public function IwaData(){
-        return response()->json(['message' => 'Hello, World!'], 200);
+        $data = Measurement::all();
+        return response()->json($data, 200);
     }
 }
