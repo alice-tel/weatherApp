@@ -40,10 +40,9 @@
 
                         <div class="mt-2">
                             <select name="user_role" id="user_role" required>
-                                <option value=1>Admin</option>
-                                <option value=2>Technische medewerker</option>
-                                <option value=3>Technische onderzoeker</option>
-                                <option value=4>Commercieel medewerker</option>
+                                @foreach ($roles as $role)
+                                    <option value={{$role->getKey()}}>{{$role['role']}}</option>
+                                @endforeach
                             </select>
                             <x-form-error name="user_role" />
                         </div>

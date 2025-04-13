@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscription_stations', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('subscription');
             $table->string('station', 10);
 
