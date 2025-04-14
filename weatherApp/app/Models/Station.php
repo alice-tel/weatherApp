@@ -30,13 +30,17 @@ class Station extends Model
         return $this->hasOne(Geolocation::class, 'station_name', 'name');
     }
 
-    public function nearestLocation()
+    public function nearestLocation(): NearestLocation
     {
-        return $this->hasOne(NearestLocation::class, 'station_name', 'name');
+        return $this->hasOne(NearestLocation::class, 'station_name', 'name')->getModel();
     }
 
     public function subscriptions()
     {
         return $this->belongsToMany(Subscription::class, 'subscription_station', 'station', 'subscription');
+    }
+
+    public static function getStationFromID(string $name): Station {
+        return Station::where("name", $name)->first();
     }
 }

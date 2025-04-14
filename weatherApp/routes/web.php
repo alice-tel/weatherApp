@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContractTestController;
 use App\Http\Controllers\WeatherDataController;
 use App\Http\Controllers\WeatherViewController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'checkrole:1'])->group(function () {
         ->name('administrator.superAdminPage');
 });
 
+Route::get('/contract', [ContractTestController::class, 'show'])->name('contract');
 
 
 
