@@ -42,6 +42,8 @@ class AdminSeeder extends Seeder
                     'employee_code' => 'admintest1',
                     'user_role' => 1,
                     'password' => Hash::make('admintest'),
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ],[
                     'first_name' => 'Test',
                     'name' => 'TM',
@@ -49,6 +51,8 @@ class AdminSeeder extends Seeder
                     'employee_code' => 'techmedewe',
                     'user_role' => 2,
                     'password' => Hash::make('technisch2'),
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ],[
                     'first_name' => 'Test',
                     'name' => 'TO',
@@ -56,6 +60,8 @@ class AdminSeeder extends Seeder
                     'employee_code' => 'techonderz',
                     'user_role' => 3,
                     'password' => Hash::make('onderzoek3'),
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ],[
                     'first_name' => 'Test',
                     'name' => 'CM',
@@ -63,6 +69,8 @@ class AdminSeeder extends Seeder
                     'employee_code' => 'commermede',
                     'user_role' => 4,
                     'password' => Hash::make('commercieel4'),
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ]
             ];
 
