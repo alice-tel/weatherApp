@@ -28,6 +28,8 @@ Route::get('/administrator/superAdminPage', [AdminController::class, 'adminIndex
 
 Route::get('/contract', [ContractTestController::class, 'show'])->name('contract');
 
+//Route::post('/IWA/contracten/login', [JWTAuthController::class, 'login'])->middleware('auth:api');
+//Route::post('/IWA/contracten/logout', [JWTAuthController::class, 'logout'])->middleware('auth:api');
 
 
 
