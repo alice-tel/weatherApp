@@ -14,7 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // not needed
+        $this->call([
+            RoleSeeder::class,
+            CompanySeeder::class,
+            ContractSeeder::class,
+            OperatorTypeSeeder::class,
+            ComparisonOperatorTypeSeeder::class,
+            CriteriumTypeSeeder::class,
+            QuerySeeder::class,
+            CriteriumGroupSeeder::class,
+            CriteriumSeeder::class,
+            SubscriptionTypeSeeder::class,
+            AdminSeeder::class,
+        ]);
 
     }
 }
