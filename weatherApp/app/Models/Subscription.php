@@ -35,6 +35,6 @@ class Subscription extends Model
 
     public function stations()
     {
-        return $this->belongsToMany(Station::class, 'subscription_station', 'subscription', 'station');
+        return $this->belongsToMany(Station::class, 'subscription_stations', 'subscription', 'station');
     }
 }

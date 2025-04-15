@@ -6,7 +6,7 @@ use App\Http\Controllers\WeatherDataController;
 use App\Http\Controllers\WeatherViewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
-use App\Http\Controllers\SubscriptionTypeViewController;
+use App\Http\Controllers\SubscriptionViewController;
 
 Route::get('/weather', [WeatherViewController::class, 'index'])->name('weather.index');
 Route::get('weather/dashboard', [WeatherViewController::class, 'dashboard'])->name('weather.dashboard');
@@ -14,7 +14,8 @@ Route::get('weather/station/{name}', [WeatherViewController::class, 'station'])-
 Route::get('weather/login', [WeatherViewController::class, 'loginPagina'])->name('weather.loginOefenen');
 Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 
-Route::get('/subscriptions', [SubscriptionTypeViewController::class, 'index'])->name('subscriptions.index');
+Route::get('/subscriptions', [SubscriptionViewController::class, 'index'])->name('subscriptions.index');
+Route::get('subscriptions/{id}', [SubscriptionViewController::class, 'contract'])->name('subscriptions.contract');
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
 Route::post('/register', [AuthController::class, 'Register'])->name('register');

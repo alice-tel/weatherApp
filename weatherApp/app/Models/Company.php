@@ -25,7 +25,12 @@ class Company extends Model
 
     public function subscriptions()
     {
-        return $this->hasMany(Subscription::class, 'company', 'id');
+        return $this->hasMany(Subscription::class, 'id', 'company');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country', 'country_code');
     }
 
     public function relations()
