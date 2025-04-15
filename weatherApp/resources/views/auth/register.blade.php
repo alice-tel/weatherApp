@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{--TODO: allow input to stay on refresh, make role integer dropdown--}}
 @section('content')
     <form method="POST" action="/register">
         @csrf
@@ -39,8 +39,11 @@
                         <x-form-label for="user_role">User Role</x-form-label>
 
                         <div class="mt-2">
-                            <x-form-input name="user_role" id="user_role" required />
-
+                            <select name="user_role" id="user_role" required>
+                                @foreach ($roles as $role)
+                                    <option value={{$role->getKey()}}>{{$role['role']}}</option>
+                                @endforeach
+                            </select>
                             <x-form-error name="user_role" />
                         </div>
                     </x-form-field>

@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'testing2',
             'description' => 'testing insert',
         ]);
+
     }
 }

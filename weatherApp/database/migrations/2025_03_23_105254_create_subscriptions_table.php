@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('company');
             $table->unsignedBigInteger('type');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->float('price');
             $table->string('notes', 256)->nullable();
             $table->string('identifier', 45)->nullable();

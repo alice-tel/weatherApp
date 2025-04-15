@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name', 45);
             $table->string('description', 256)->nullable();
-            $table->integer('nr_stations');
-            $table->integer('frequency_in_hours');
-            $table->integer('frequency_in_days');
-            $table->boolean('continuous');
+            $table->integer('nr_stations')->nullable();
+            $table->integer('frequency_in_hours')->nullable();
+            $table->integer('frequency_in_days')->nullable();
+            $table->boolean('continuous')->nullable();
             $table->float('price_per_station');
             $table->date('valid_through')->nullable();
         });
