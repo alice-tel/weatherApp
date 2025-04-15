@@ -9,7 +9,7 @@ class RoleViewManagement {
         }
 
         $roles = [
-            1 => [ // Admin
+            6 => [ // Admin
                 ['route' => 'administrator.superAdminPage', 'label' => 'Admin Panel'],
             ],
         ];
