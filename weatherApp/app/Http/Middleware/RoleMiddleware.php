@@ -19,7 +19,7 @@ class RoleMiddleware
     {
 
         // Adjust this to check the role as a string or integer, rather than looking for a class.
-        if (session('user_role') != $role) {
+        if (!auth()->check() || auth()->user()->user_role != $role) {
             abort(403, 'Unauthorized');
         }
 
