@@ -100,8 +100,27 @@ class Query extends Model
     {
         Query::where(Query::ID, $this->getKey())->update($columns);
     }
+
+//    public function toJson($options = 0): string
+//    {
+//        $restult = "{";
+//        json_encode($this);
+//
+////        string $result
+//    }
+
     public static function getQueryFromID(int $id): Query {
         return Query::where(Query::ID, $id)->first(); // Query::all()->filter(fn ($query) => $query->getKey() == $id)->first();
+    }
+
+    public static function getQueryFromCompanyAndQueryID(int $companyID, int $queryID): ?Query
+    {
+        return Query::where(Query::CONTRACT_ID, $companyID)->where(Query::ID, $queryID)->first();
+    }
+
+    public static function getQueriesFromCompany(int $companyID): array
+    {
+        return Query::where(Query::CONTRACT_ID, $companyID)->getModels();
     }
 
 }
