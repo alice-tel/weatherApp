@@ -37,6 +37,6 @@ class CriteriumType extends Model
     }
 
     public static function getCriteriumTypeFromID(int $id): CriteriumType {
-        return CriteriumType::where(CriteriumType::ID, $id)->first(); // Query::all()->filter(fn ($query) => $query->getKey() == $id)->first();
+        return CriteriumType::where(CriteriumType::ID, $id)->first();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ComparisonOperatorType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,27 +17,33 @@ class ComparisonOperatorTypeSeeder extends Seeder
         DB::table('comparison_operator_type')->insert([
             [
                 'id'=>1,
-                'description'=>'Equal',
+                ComparisonOperatorType::DESCRIPTION=>'equal',
+                ComparisonOperatorType::OPERATOR=>'=',
             ],
             [
                 'id'=>2,
-                'description'=>'Less than'
+                ComparisonOperatorType::DESCRIPTION=>'Less than',
+                ComparisonOperatorType::OPERATOR=>'<',
             ],
             [
                 'id'=>3,
-                'description'=>'Less than or equal'
+                ComparisonOperatorType::DESCRIPTION=>'Less than or equal',
+                ComparisonOperatorType::OPERATOR=>'<=',
             ],
             [
                 'id'=>4,
-                'description'=>'More than'
+                ComparisonOperatorType::DESCRIPTION=>'More than',
+                ComparisonOperatorType::OPERATOR=>'>',
             ],
             [
                 'id'=>5,
-                'description'=>'More than or equal'
+                ComparisonOperatorType::DESCRIPTION=>'More than or equal',
+                ComparisonOperatorType::OPERATOR=>'>=',
             ],
             [
                 'id'=>6,
-                'description'=>'Not'
+                ComparisonOperatorType::DESCRIPTION=>'Not equal',
+                ComparisonOperatorType::OPERATOR=>'<>',
             ],
         ]);
     }

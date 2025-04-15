@@ -30,7 +30,7 @@ class CriteriumGroup extends Model
 
     public function getCriteriums(): array
     {
-        return Criterium::all()->where(Criterium::GROUP, $this[self::ID])->toArray();
+        return Criterium::all()->where(Criterium::GROUP, $this[self::ID])->all();
     }
 
     public function addCriteriumGroep(int $query, int $type, int $operator, int $groupLevel = null): CriteriumGroup
@@ -50,6 +50,10 @@ class CriteriumGroup extends Model
         return CriteriumType::getCriteriumTypeFromID($this[CriteriumGroup::TYPE]);
     }
 
+    public function getOperatorType(): OperatorType
+    {
+        return OperatorType::getOperatorTypeFromID($this[Criterium::OPERATOR]);
+    }
     public static function removeCriteriumGroep(int $id): void
     {
         CriteriumGroup::where(CriteriumGroup::ID, $id)->delete();
@@ -79,6 +83,35 @@ class CriteriumGroup extends Model
     {
         CriteriumGroup::where(CriteriumGroup::ID, $this->getKey())->update($columns);
     }
+
+    public function getWhereClause(): string
+    {
+        $type = $this->getCriteriumType();
+        $searchTable = $type[CriteriumType::REFERENCED_TABLE];
+        $searchField = $type[CriteriumType::REFERENCED_FIELD];
+        $criteriums = $this->getCriteriums();
+
+        $whereClause = "(";
+
+        $first = true;
+
+        foreach ($criteriums as $criterium) {
+            $operator = $criterium->getOperatorType()->getDescription();
+            $type = $criterium[Criterium::VALUE_TYPE];
+            $value = $criterium->getValue();
+            $comparison = $criterium->getComparisonType()->getOperator();
+
+            if ($type == Criterium::STRING_VALUE_INDEX) $value = "'$value'";
+            $whereClause .= ($first ? "" : " $operator ")."$searchTable.$searchField"." $comparison ".$value;
+
+            $first = false;
+        }
+
+        $whereClause .= ")";
+
+        return $whereClause;
+    }
+
 
     public static function getCriteriumGroepFromID(int $id): CriteriumGroup {
         return CriteriumGroup::where(CriteriumGroup::ID, $id)->first(); // Query::all()->filter(fn ($query) => $query->getKey() == $id)->first();

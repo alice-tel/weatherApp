@@ -9,10 +9,24 @@ class OperatorType extends Model
 {
     use HasFactory;
 
-    protected $table = 'operator_type';
+    public const  TABLE_NAME = 'operator_type';
+    public const  ID = 'id';
+    public const  DESCRIPTION = 'description';
+
+    protected $table = self::TABLE_NAME;
     public $timestamps = false;
 
     protected $fillable = [
-        'description',
+        self::DESCRIPTION,
     ];
+
+    public function getDescription(): string
+    {
+        return $this[self::DESCRIPTION];
+    }
+
+    public static function getOperatorTypeFromID(int $id): OperatorType
+    {
+        return OperatorType::where(OperatorType::ID, $id)->first();
+    }
 }

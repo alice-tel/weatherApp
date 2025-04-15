@@ -23,8 +23,10 @@ class ContractenQueryController extends Controller
     {
         $query = Query::getQueryFromCompanyAndQueryID($identifier, $idQuery);
         if ($query == null) return response()->json(null);
-        return $query->getStations();
+        $stations = $query->getStationsFromQuery();
+        return response()->json($stations);
     }
+
     public function getStationFromName(int $identifier, string $name)
     {
         $queries = Query::getQueriesFromCompany($identifier);

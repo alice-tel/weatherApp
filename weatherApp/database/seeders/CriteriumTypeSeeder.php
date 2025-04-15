@@ -32,7 +32,7 @@ class CriteriumTypeSeeder extends Seeder
                 'id'=>3,
                 'description'=>'Coördinaten, breedtegraad',
                 'referenced_table'=>'stations',
-                'referenced_field'=>'lattitude',
+                'referenced_field'=>'latitude',
             ],
             [
                 'id'=>4,

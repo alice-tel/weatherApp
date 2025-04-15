@@ -19,6 +19,10 @@ class Criterium extends Model
     public const VALUE_TYPE = 'value_type';
     public const VALUE_COMPARISON = 'value_comparison';
 
+    public const INT_VALUE_INDEX = 0;
+    public const STRING_VALUE_INDEX = 1;
+    public const FLOAT_VALUE_INDEX = 2;
+
     protected $table = self::TABLE_NAME;
 
     public $timestamps = false;
@@ -47,6 +51,27 @@ class Criterium extends Model
 
         return $criterium;
     }
+    public function getOperatorType(): OperatorType
+    {
+        return OperatorType::getOperatorTypeFromID($this[Criterium::OPERATOR]);
+    }
+
+    public function getComparisonType(): ComparisonOperatorType
+    {
+        return ComparisonOperatorType::getComparisonTypeFromID($this[Criterium::VALUE_COMPARISON]);
+    }
+
+    public function getValue(): mixed
+    {
+        $valueType = $this[Criterium::VALUE_TYPE];
+        return match ($valueType) {
+            self::INT_VALUE_INDEX => $this[Criterium::INT_VALUE],
+            self::STRING_VALUE_INDEX => $this[Criterium::STRING_VALUE],
+            self::FLOAT_VALUE_INDEX => $this[Criterium::FLOAT_VALUE],
+            null => $this[Criterium::INT_VALUE],
+        };
+    }
+
     public static function removeCriterium(int $id): void
     {
         Criterium::where(Criterium::ID, $id)->delete();

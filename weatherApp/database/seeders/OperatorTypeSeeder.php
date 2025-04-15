@@ -16,12 +16,12 @@ class OperatorTypeSeeder extends Seeder
         DB::table('operator_type')->insert([
             [
                 'id'=>1,
-                'description'=>'And',
+                'description'=>'AND',
             ],
             [
                 'id'=>2,
-                'description'=>'Or'
-            ]
+                'description'=>'OR'
+            ],
         ]);
     }
 }
