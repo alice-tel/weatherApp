@@ -23,7 +23,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // post because this is a button that only sends the logout request
 
-Route::get('/administrator/superAdminPage', [AdminController::class, 'adminIndex'])->name('administrator.superAdminPage')->middleware('checkrole:1');;
+Route::get('/administrator/superAdminPage', [AdminController::class, 'adminIndex'])->name('administrator.superAdminPage')->middleware('checkrole:6');;
 
 Route::get('/contract', [ContractTestController::class, 'show'])->name('contract');
 
