@@ -37,7 +37,7 @@ class Station extends Model
 
     public function subscriptions()
     {
-        return $this->belongsToMany(Subscription::class, 'subscription_station', 'station', 'subscription');
+        return $this->belongsToMany(Subscription::class, 'subscription_stations', 'station', 'subscription');
     }
 
     public static function getStationFromID(string $name): Station {
