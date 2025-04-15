@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Measurement;
 use App\Models\Station;
 use App\Models\OriginalMeasurement;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -97,8 +98,11 @@ class WeatherDataController extends Controller
             $measurementData[$dbField] = $data[$apiField];
 
             // check for invalid temp fluctuations
-            if ($apiField === 'TEMP' && $this->isTemperatureInvalid($data[$apiField])) {
+            if ($apiField === 'TEMP' && $this->isTemperatureInvalid($data[$apiField], $measurementData["date"])) {
                 $invalidTemperature = $data[$apiField];
+
+                $date = $measurementData["date"];
+                $measurementData[$dbField] = $this->getTempsAggregate($date);
             }
         }
 
@@ -117,10 +121,33 @@ class WeatherDataController extends Controller
         return $measurement;
     }
 
-    private function isTemperatureInvalid($temperature)
+
+
+    private function isTemperatureInvalid($temperature, string $date) : bool
     {
-        // not implementing this right now
-        // logic for checking temp validity
-        return false;
+        // get all the temperature of the last 30 measurements
+        $lastTemps = $this->getTempsAggregate($date);
+
+        $twentyPercent = $lastTemps * 0.2;
+        $topTemperature = $lastTemps + $twentyPercent;
+        $bottomTemperature = $lastTemps - $twentyPercent;
+
+        return $temperature < $bottomTemperature || $temperature > $topTemperature;
+    }
+
+    private function getTempsAggregate(string $date): float
+    {
+        $lastTemps = Measurement::getLastTemperatures(30, $date);
+        return $this->extrapolate($lastTemps);
+    }
+
+    private function extrapolate($lastTemps): float
+    {
+       $total = 0;
+       foreach ($lastTemps as $temperature) {
+           $total += $temperature;
+       }
+
+       return $total / sizeof($lastTemps);
     }
 }
