@@ -29,6 +29,7 @@ class AuthController extends Controller
 
     public function Register(Request $request){
 
+        $registerActivatecheck = false;
         $request->validate([
             'first_name' => 'required|string|max:45',
             'last_name' => 'required|string|max:100',
@@ -63,7 +64,6 @@ class AuthController extends Controller
         }
 
         request()->session()->regenerate();
-
         session(['user_role' => Auth::user()->user_role]);
 //        dump(Auth::user()->user_role , "in login proces");
 
