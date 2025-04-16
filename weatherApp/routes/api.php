@@ -17,7 +17,7 @@ Route::post('/weather-data', [WeatherDataController::class, 'store']);
 Route::get('/dashboard/latest', [WeatherViewController::class, 'latestData']);
 
 Route::post('/IWA/contracten/login', [JWTAuthController::class, 'login']);
-Route::post('/IWA/contracten/logout', [JWTAuthController::class, 'logout']);
+Route::post('/IWA/contracten/logout', [JWTAuthController::class, 'logout'])->middleware('auth:api');
 
 Route::get('/IwaApi', [IwaApiController::class, 'IwaData']);
 

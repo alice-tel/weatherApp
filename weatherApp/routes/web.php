@@ -18,7 +18,7 @@ Route::get('/', [WeatherViewController::class, 'home'])->name('home');
 Route::get('/subscriptions', [SubscriptionViewController::class, 'index'])->name('subscriptions.index');
 Route::get('subscriptions/{id}', [SubscriptionViewController::class, 'contract'])->name('subscriptions.contract');
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register')->middleware('checkrole:6');
 Route::post('/register', [AuthController::class, 'Register'])->name('register')->middleware('checkrole:6');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
