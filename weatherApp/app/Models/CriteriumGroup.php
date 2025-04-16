@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Log;
 
 class CriteriumGroup extends Model
 {
@@ -27,9 +28,92 @@ class CriteriumGroup extends Model
         self::OPERATOR,
     ];
 
-    public function queries(): BelongsToMany
+    public function getCriteriums(): array
     {
-        return $this->belongsToMany(Criterium::class,
-            Criterium::TABLE_NAME, Criterium::GROUP, self::ID);
+        return Criterium::all()->where(Criterium::GROUP, $this[self::ID])->all();
+    }
+
+    public function addCriteriumGroep(int $query, int $type, int $operator, int $groupLevel = null): CriteriumGroup
+    {
+        $criteriumGroep = CriteriumGroup::create([
+            CriteriumGroup::QUERY => $query,
+            CriteriumGroup::TYPE => $type,
+            CriteriumGroup::OPERATOR => $operator,
+            CriteriumGroup::GROUP_LEVEL => $groupLevel,
+        ]);
+
+        return $criteriumGroep;
+    }
+
+    public function getCriteriumType(): CriteriumType
+    {
+        return CriteriumType::getCriteriumTypeFromID($this[CriteriumGroup::TYPE]);
+    }
+
+    public function getOperatorType(): OperatorType
+    {
+        return OperatorType::getOperatorTypeFromID($this[Criterium::OPERATOR]);
+    }
+    public static function removeCriteriumGroep(int $id): void
+    {
+        CriteriumGroup::where(CriteriumGroup::ID, $id)->delete();
+    }
+
+    public function moveToQuery(int $queryID): void
+    {
+        $this->changeColumns([CriteriumGroup::QUERY => $queryID]);
+    }
+
+    public function changeCriteruimType(int $type): void
+    {
+        $this->changeColumns([CriteriumGroup::TYPE => $type]);
+    }
+
+    public function changeGroupLevel(int $level): void
+    {
+        $this->changeColumns([CriteriumGroup::GROUP_LEVEL => $level]);
+    }
+
+    public function changeOperator(int $operator): void
+    {
+        $this->changeColumns([CriteriumGroup::OPERATOR => $operator]);
+    }
+
+    private function changeColumns(array $columns): void
+    {
+        CriteriumGroup::where(CriteriumGroup::ID, $this->getKey())->update($columns);
+    }
+
+    public function getWhereClause(): string
+    {
+        $type = $this->getCriteriumType();
+        $searchTable = $type[CriteriumType::REFERENCED_TABLE];
+        $searchField = $type[CriteriumType::REFERENCED_FIELD];
+        $criteriums = $this->getCriteriums();
+
+        $whereClause = "(";
+
+        $first = true;
+
+        foreach ($criteriums as $criterium) {
+            $operator = $criterium->getOperatorType()->getDescription();
+            $type = $criterium[Criterium::VALUE_TYPE];
+            $value = $criterium->getValue();
+            $comparison = $criterium->getComparisonType()->getOperator();
+
+            if ($type == Criterium::STRING_VALUE_INDEX) $value = "'$value'";
+            $whereClause .= ($first ? "" : " $operator ")."$searchTable.$searchField"." $comparison ".$value;
+
+            $first = false;
+        }
+
+        $whereClause .= ")";
+
+        return $whereClause;
+    }
+
+
+    public static function getCriteriumGroepFromID(int $id): CriteriumGroup {
+        return CriteriumGroup::where(CriteriumGroup::ID, $id)->first(); // Query::all()->filter(fn ($query) => $query->getKey() == $id)->first();
     }
 }

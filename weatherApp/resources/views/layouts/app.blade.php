@@ -27,6 +27,12 @@
 
                 @auth {{-- only visible when logged in (WORKS!) --}}
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('show.register') }}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('subscriptions.index') }}">Subscriptions</a>
+                </li>
+                <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger" >Logout</button>
@@ -34,9 +40,6 @@
                 </li>
                 @endauth
                 @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show.register') }}">Register</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('show.login') }}">Login</a>
                 </li>

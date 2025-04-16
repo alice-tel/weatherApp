@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Traits\EnumeratesValues;
 use voku\helper\ASCII;
 
 class Query extends Model
@@ -45,26 +47,42 @@ class Query extends Model
         return $query;
     }
 
-    public function queryQueryByCriteruimGroupID(int $id): mixed
+    public function getStationsFromQuery(): array
     {
-        $critiriumGroup = $this->selectCriteriumGroup()->where(CriteriumGroup::ID, $id)->first();
+        $queryResult = DB::select($this->getCompleteQueryString());
+        $stationInstance = new Station();
 
-        $values = match ($critiriumGroup->getCriteriumType()) {
-            0 => $this->getValueForGeoLocation($critiriumGroup),
-        };
+        return $stationInstance::hydrate($queryResult)->all();
     }
 
-    private function getValueForGeoLocation(CriteriumGroup $criteriumGroep): int
+    public function getCompleteQueryString(): string
     {
-        $type = $criteriumGroep->getCriteriumType();
-        $searchTable = $type[CriteriumType::REFERENCED_TABLE];
-        $searchField = $type[CriteriumType::REFERENCED_FIELD];
-        $criteriums = $criteriumGroep->getCriteriums();
+        $critiriumGroups = $this->selectCriteriumGroup()->all();
 
+        $startQueryString = "SELECT stations.name, stations.longitude, stations.latitude, stations.elevation FROM stations JOIN geolocations ON geolocations.station_name = stations.name JOIN nearest_locations ON nearest_locations.station_name = stations.name WHERE ";
+
+        $whereString = $this->getCompleteWhereClause($critiriumGroups);
+
+        return $startQueryString . $whereString;
     }
+
+
+    private function getCompleteWhereClause(array $criteriumGroups): string {
+        $whereClause = "";
+        $first = true;
+        usort($criteriumGroups, fn($a, $b) => strcmp($a[CriteriumGroup::GROUP_LEVEL], $b[CriteriumGroup::GROUP_LEVEL]));
+        foreach ($criteriumGroups as $critiriumGroup) {
+            $operator = $critiriumGroup->getOperatorType()->getDescription();
+            $localWhereClause = $critiriumGroup->getWhereClause();
+            $whereClause .= ($first ? "" : " $operator ") . $localWhereClause;
+
+            $first = false;
+        }
+        return $whereClause;
+    }
+
 
     public function getStations(): array {
-//        return CriteriumType::getIDWithReferencedTable("stations");
         $critiriumGroups = $this->selectCriteriumGroup()->
         whereIn(CriteriumGroup::TYPE, CriteriumType::getIDWithReferencedTable("stations"))->all();
 
@@ -72,7 +90,7 @@ class Query extends Model
 
         foreach ($critiriumGroups as $critiriumGroup) {
             $critiriums = $critiriumGroup->getCriteriums();
-//            $stations = array_merge($stations, $critiriums);
+
             foreach ($critiriums as $critirium) {
                 $stationNames[] = $critirium[Criterium::STRING_VALUE];
             }
@@ -100,8 +118,27 @@ class Query extends Model
     {
         Query::where(Query::ID, $this->getKey())->update($columns);
     }
+
+//    public function toJson($options = 0): string
+//    {
+//        $restult = "{";
+//        json_encode($this);
+//
+////        string $result
+//    }
+
     public static function getQueryFromID(int $id): Query {
         return Query::where(Query::ID, $id)->first(); // Query::all()->filter(fn ($query) => $query->getKey() == $id)->first();
+    }
+
+    public static function getQueryFromCompanyAndQueryID(int $companyID, int $queryID): ?Query
+    {
+        return Query::where(Query::CONTRACT_ID, $companyID)->where(Query::ID, $queryID)->first();
+    }
+
+    public static function getQueriesFromCompany(int $companyID): array
+    {
+        return Query::where(Query::CONTRACT_ID, $companyID)->getModels();
     }
 
 }

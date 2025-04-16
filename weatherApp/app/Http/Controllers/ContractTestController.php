@@ -12,13 +12,14 @@ class ContractTestController extends Controller
     public function show()
     {
         $contracts = Query::all();
-        $contract = $contracts->first()->getStations();
+        $contract = $contracts->first()->getStationsFromQuery();
 
 //        Log::info($contract);
 
 //        $id =  Query::getQueryFromID(6)->changeDescription("Better");
-        $id = print_r($contract, true); // print_r($contract, true);
+//        $id = print_r($contract, true); // print_r($contract, true);
 
+        return $contract;  //view('contract.contractPage', compact('id'));
         return view('contract.contractPage', compact('id'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
 
 class Measurement extends Model
 {
@@ -36,5 +37,15 @@ class Measurement extends Model
     public function originalMeasurement()
     {
         return $this->hasOne(OriginalMeasurement::class, 'corrected_measurement', 'id');
+    }
+
+    public static function getLastTemperatures(int $amount, string $date) : array
+    {
+        $tempArray = Measurement::all()->where("date", "<", $date)->sortBy('date')->take($amount)->select('temperature')->toArray();
+        $formatedTemps = [];
+        foreach ($tempArray as $temperature) {
+            $formatedTemps[] = $temperature['temperature'];
+        }
+        return $formatedTemps;
     }
 }

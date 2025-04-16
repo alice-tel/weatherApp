@@ -11,9 +11,8 @@ class RoleViewManagement {
         $roles = [
             6 => [ // Admin
                 ['route' => 'administrator.superAdminPage', 'label' => 'Admin Panel'],
-                ['route' => 'administrator.showUsers', 'label' => 'EditUsers'],
-                ['route' => 'administrator.showRoles', 'label' => 'EditRoles'],
-
+                ['route' => 'show.register', 'label' => 'Register'],
+                ['route' => 'register', 'label' => 'Register'],
             ],
         ];
 
@@ -21,5 +20,3 @@ class RoleViewManagement {
     }
 
 }
-
-

@@ -8,15 +8,15 @@
                 <div class="card text-center">
                     <div class="card-header">
                         <h5>
-                            Type: {{ $subscription->name }}
+                           {{ $subscription->identifier }}
                         </h5>
                     </div>
                     <div class="card-body">
-                        <p>{{ $subscription->description }}</p>
-
-                        <p><strong>Nr of stations:</strong> <span class="subscription-stations">{{ $subscription->nr_stations }}</span></p>
-
-                        <p><strong>Price/station:</strong> $<span class="price-station">{{ $subscription->price_per_station }}</span></p>
+                        <p><strong>Company: </strong>{{ $subscription->Company->name }}</p>
+                        <p><strong>Type: </strong>{{ $subscription->subscriptionType->name }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ route('subscriptions.contract', $subscription->id) }}" class="btn btn-sm btn-info">View Subscription Details</a>
                     </div>
                 </div>
             </div>

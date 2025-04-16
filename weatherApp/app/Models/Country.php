@@ -9,7 +9,7 @@ class Country extends Model
 {
     use HasFactory;
 
-    protected $table = 'country';
+    protected $table = 'countries';
     protected $primaryKey = 'country_code';
     protected $keyType = 'string';
     public $incrementing = false;
@@ -23,6 +23,11 @@ class Country extends Model
     public function geolocations()
     {
         return $this->hasMany(Geolocation::class, 'country_code', 'country_code');
+    }
+
+    public function company()
+    {
+        return $this->hasMany(Company::class, 'country', 'country_code');
     }
 
     public function nearestlocations()

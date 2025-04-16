@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
                 'name' => 'TM',
                 'email' => 'tm222@test.com',
                 'employee_code' => 'techmedewe',
-                'user_role' => 1,
+                'user_role' => 5,
                 'password' => Hash::make('technisch2'),
                 'created_at' => now(),
                 'updated_at' => now()

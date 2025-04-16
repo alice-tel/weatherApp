@@ -9,7 +9,7 @@ class NearestLocation extends Model
 {
     use HasFactory;
 
-    protected $table = 'nearestlocation';
+    protected $table = 'nearest_locations';
     public $timestamps = false;
 
     protected $fillable = [
