@@ -13,6 +13,9 @@ class RoleViewManagement {
                 ['route' => 'administrator.superAdminPage', 'label' => 'Admin Panel'],
                 ['route' => 'show.register', 'label' => 'Register'],
                 ['route' => 'register', 'label' => 'Register'],
+                ['route' => 'administrator.showUsers', 'label' => 'EditUsers'],
+                ['route' => 'administrator.showRoles', 'label' => 'EditRoles'],
+
             ],
         ];
 
