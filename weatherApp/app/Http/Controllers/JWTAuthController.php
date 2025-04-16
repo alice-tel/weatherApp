@@ -43,12 +43,9 @@ class JWTAuthController extends Controller
     {
         auth()->logout();
 
-        try {
-            auth('api')->logout();
-            return response()->json(['message' => 'Successfully logged out']);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        auth('api')->logout();
+        return response()->json(['message' => 'Successfully logged out']);
+
     }
 
     /**
