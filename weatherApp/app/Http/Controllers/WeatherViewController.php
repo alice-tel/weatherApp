@@ -99,10 +99,7 @@ class WeatherViewController extends Controller
         return count($formatted) > 0 ? implode(', ', $formatted) : 'None';
     }
 
-    public function loginPagina()
-    {
-        return view('weather.loginOefenen');
-    }
+
 
     public function home()
     {

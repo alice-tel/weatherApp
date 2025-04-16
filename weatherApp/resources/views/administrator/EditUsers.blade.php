@@ -7,4 +7,10 @@
 
 
     </div>
+    <div>
+
+        @foreach($users as $user)
+            <p>{{ $user->name }} - Role: {{ $user->user_role }}</p>
+        @endforeach
+    </div>
 @endsection

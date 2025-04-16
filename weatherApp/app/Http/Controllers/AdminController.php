@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\User;
 class AdminController extends Controller
 {
     public function adminIndex()
@@ -13,12 +14,14 @@ class AdminController extends Controller
 
     public function showRoles()
     {
+
         return view('administrator.EditRoles');
     }
 
     public function showUsers()
     {
-        return view('administrator.EditUsers');
+        $data = User::all();
+        return view('administrator.EditUsers',['users' => $data]);
     }
 
     public function updateRoles()
