@@ -31,7 +31,7 @@ class JWTAuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth('api')->user());
     }
 
     /**
@@ -41,11 +41,8 @@ class JWTAuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
-
         auth('api')->logout();
         return response()->json(['message' => 'Successfully logged out']);
-
     }
 
     /**
@@ -55,7 +52,7 @@ class JWTAuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth('api')->refresh());
     }
 
     /**
