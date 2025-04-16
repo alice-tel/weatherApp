@@ -28,23 +28,9 @@ Route::get('/administrator/superAdminPage', [AdminController::class, 'adminIndex
 
 Route::get('/contract', [ContractTestController::class, 'show'])->name('contract');
 
-//Route::post('/IWA/contracten/login', [JWTAuthController::class, 'login'])->middleware('auth:api');
-//Route::post('/IWA/contracten/logout', [JWTAuthController::class, 'logout'])->middleware('auth:api');
-
-
-
-//Route::get( 'weather/login')->name('weather.loginOefenen');
-
 Route::get('/about', function () {
     return view('about');
 });
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
-
-//
-//Route::get('/register', function()
-//{
-//    echo '/register called';
-//    return 'register test';
-//})->name('show.register');
