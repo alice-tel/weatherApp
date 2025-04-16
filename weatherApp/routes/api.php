@@ -21,7 +21,7 @@ Route::post('/IWA/contracten/logout', [JWTAuthController::class, 'logout'])->mid
 
 Route::get('/IwaApi', [IwaApiController::class, 'IwaData']);
 
-Route::get('/IWA/contracten/{identifier}/{queryID}', [ContractenQueryController::class, 'getQuery'])->name('contracten.queryID');
-Route::get('/IWA/contracten/{identifier}/{queryID}/stations', [ContractenQueryController::class, 'getStationsFromQuery'])->name('contracten.queryID.stations');
-Route::get('/IWA/contracten/{identifier}/station/{name}', [ContractenQueryController::class, 'getStationFromName'])->name('contracten.station.name');
+Route::get('/IWA/contracten/{identifier}/{queryID}', [ContractenQueryController::class, 'getQuery'])->name('contracten.queryID')->middleware("auth:api");
+Route::get('/IWA/contracten/{identifier}/{queryID}/stations', [ContractenQueryController::class, 'getStationsFromQuery'])->name('contracten.queryID.stations')->middleware("auth:api");
+Route::get('/IWA/contracten/{identifier}/station/{name}', [ContractenQueryController::class, 'getStationFromName'])->name('contracten.station.name')->middleware("auth:api");
 

@@ -31,6 +31,9 @@
                     <a class="nav-link" href="{{ route('subscriptions.index') }}">Subscriptions</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('faulty.stations') }}">Faulty Stations</a>
+                </li>
+                <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger" >Logout</button>

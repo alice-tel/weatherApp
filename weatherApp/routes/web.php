@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContractTestController;
+use App\Http\Controllers\FaultyStationsController;
 use App\Http\Controllers\WeatherDataController;
 use App\Http\Controllers\WeatherViewController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('/administrator/EditUsers', [AdminController::class, 'showUsers'])->n
 Route::post('/administrator/EditUsers', [AdminController::class, 'updateUsers'])->name('administrator.UpdateUsers')->middleware('checkrole:6');
 
 Route::get('/contract', [ContractTestController::class, 'show'])->name('contract')->middleware('auth');
+Route::get('/faulty-stations', [FaultyStationsController::class, 'show'])->name('faulty.stations');
 
 Route::get('/about', function () {
     return view('about');

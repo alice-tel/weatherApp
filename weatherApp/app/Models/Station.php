@@ -25,6 +25,21 @@ class Station extends Model
     {
         return $this->hasMany(Measurement::class, 'station', 'name');
     }
+
+    public function getMessurements(): array {
+        return Measurement::where('station', $this['name'])->getModels();
+    }
+
+    public function hasCorrectedMeasurement(): bool
+    {
+        foreach ($this->getMessurements() as $measurement) {
+            if ($measurement->hasOriginalMeasurement()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function geolocation()
     {
         return $this->hasOne(Geolocation::class, 'station_name', 'name');

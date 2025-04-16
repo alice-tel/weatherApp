@@ -96,13 +96,15 @@ class WeatherDataController extends Controller
 
             // Store the value in the measurement data array
             $measurementData[$dbField] = $data[$apiField];
-
+            Log::info("OG: ".$measurementData[$dbField]);
             // check for invalid temp fluctuations
             if ($apiField === 'TEMP' && $this->isTemperatureInvalid($data[$apiField], $measurementData["date"])) {
                 $invalidTemperature = $data[$apiField];
 
                 $date = $measurementData["date"];
+                Log::info("new: ".$this->getTempsAggregate($date));
                 $measurementData[$dbField] = $this->getTempsAggregate($date);
+                Log::info("AFT: ".$measurementData[$dbField]);
             }
         }
 
@@ -125,6 +127,8 @@ class WeatherDataController extends Controller
 
     private function isTemperatureInvalid($temperature, string $date) : bool
     {
+
+        if (count(Measurement::getLastTemperatures(30, $date)) < 30) return false;
         // get all the temperature of the last 30 measurements
         $lastTemps = $this->getTempsAggregate($date);
 

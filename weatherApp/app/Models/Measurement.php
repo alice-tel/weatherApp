@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Date;
 
 class Measurement extends Model
@@ -34,9 +35,19 @@ class Measurement extends Model
         return $this->belongsTo(Station::class, 'station', 'name');
     }
 
-    public function originalMeasurement()
+    public function originalMeasurement(): HasOne
     {
         return $this->hasOne(OriginalMeasurement::class, 'corrected_measurement', 'id');
+    }
+
+    public function hasOriginalMeasurement(): bool
+    {
+        return count($this->getOriginalMeasurements()) > 0;
+    }
+
+    public function getOriginalMeasurements(): array
+    {
+        return OriginalMeasurement::where('corrected_measurement', $this['id'])->getModels();
     }
 
     public static function getLastTemperatures(int $amount, string $date) : array
