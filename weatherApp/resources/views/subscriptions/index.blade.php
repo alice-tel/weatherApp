@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- rework this at some point to show actual customer subscriptions :) --}}
     <div class="row" id="subscriptionTypeContainer">
         @foreach($subscriptions as $subscription)
             <div class="col-md-4 mb-4 subscription-card" subscription="{{$subscription->name}}">

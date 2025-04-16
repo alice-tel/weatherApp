@@ -10,9 +10,8 @@ class RoleViewManagement {
 
         $roles = [
             6 => [ // Admin
-                ['route' => 'administrator.superAdminPage', 'label' => 'Admin Panel'],
                 ['route' => 'show.register', 'label' => 'Register'],
-                ['route' => 'administrator.showUsers', 'label' => 'EditUsers'],
+                ['route' => 'administrator.showUsers', 'label' => 'Admin page'],
 
 
             ],

@@ -25,6 +25,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // p
 
 //adminPages
 Route::get('/administrator/superAdminPage', [AdminController::class, 'adminIndex'])->name('administrator.superAdminPage')->middleware('checkrole:6');
+Route::get('administrator/deleteUser/{id}', [AdminController::class, 'deleteUser'])->name('administrator.deleteUser')->middleware('checkrole:6');
 //Route::get('/administrator/EditRoles', [AdminController::class, 'showRoles'])->name('administrator.showRoles')->middleware('checkrole:6');
 Route::get('/administrator/EditUsers', [AdminController::class, 'showUsers'])->name('administrator.showUsers')->middleware('checkrole:6');
 //Route::post('/administrator/EditRoles', [AdminController::class, 'updateRoles'])->name('administrator.UpdateRoles')->middleware('checkrole:6');
