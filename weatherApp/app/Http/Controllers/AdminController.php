@@ -20,8 +20,8 @@ class AdminController extends Controller
 
     public function showUsers()
     {
-        $data = User::all();
-        return view('administrator.EditUsers',['users' => $data]);
+        $users = User::with('userRole')->get();
+        return view('administrator.EditUsers', compact('users'));
     }
 
     public function updateRoles()
