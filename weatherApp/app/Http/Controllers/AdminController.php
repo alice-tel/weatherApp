@@ -24,6 +24,13 @@ class AdminController extends Controller
         return view('administrator.EditUsers', compact('users'));
     }
 
+    public function deleteUser($userId)
+    {
+        $user = User::where('id', $userId)->delete();
+        return redirect()->route('administrator.showUsers');
+    }
+
+// unused
     public function updateRoles()
     {
         return view('administrator.EditRoles');

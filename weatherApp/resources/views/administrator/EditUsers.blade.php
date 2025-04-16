@@ -22,6 +22,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <a href="{{ route('administrator.deleteUser', $user->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
                 </div>
             @endforeach
         </div>
