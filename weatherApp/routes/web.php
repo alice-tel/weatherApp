@@ -19,7 +19,7 @@ Route::get('/subscriptions', [SubscriptionViewController::class, 'index'])->name
 Route::get('subscriptions/{id}', [SubscriptionViewController::class, 'contract'])->name('subscriptions.contract');
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
-Route::post('/register', [AuthController::class, 'Register'])->name('register');
+Route::post('/register', [AuthController::class, 'Register'])->name('register')->middleware('checkrole:6');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'Login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // post because this is a button that only sends the logout request
