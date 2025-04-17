@@ -29,6 +29,6 @@ Route::get('/IWA/subscriptions/{id}', [SubscriptionApiController::class, 'show']
 
 //api query routes
 Route::get('/IWA/contracten/{identifier}/{queryID}', [ContractenQueryController::class, 'getQuery'])->name('contracten.queryID')->middleware("auth:api");
-Route::get('/IWA/contracten/{identifier}/{queryID}/stations', [ContractenQueryController::class, 'getStationsFromQuery'])->name('contracten.queryID.stations')->middleware("auth:api");
-Route::get('/IWA/contracten/{identifier}/station/{name}', [ContractenQueryController::class, 'getStationFromName'])->name('contracten.station.name')->middleware("auth:api");
+Route::get('/IWA/contracten/{identifier}/{queryID}/stations', [ContractenQueryController::class, 'getStationsFromQuery'])->name('contracten.stations')->middleware("auth:api");
+Route::get('/IWA/contracten/{identifier}/station/{name}', [ContractenQueryController::class, 'getStationFromName'])->name('contracten.name')->middleware("auth:api");
 

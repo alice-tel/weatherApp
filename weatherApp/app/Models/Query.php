@@ -49,10 +49,11 @@ class Query extends Model
 
     public function getStationsFromQuery(): array
     {
-        $queryResult = DB::select($this->getCompleteQueryString());
+//        $queryResult = DB::select($this->getCompleteQueryString());
+        $queryResult = Station::all()->take(2)->all();
         $stationInstance = new Station();
 
-        return $stationInstance::hydrate($queryResult)->all();
+        return $queryResult; //$stationInstance::hydrate($queryResult)->all();
     }
 
     public function getCompleteQueryString(): string

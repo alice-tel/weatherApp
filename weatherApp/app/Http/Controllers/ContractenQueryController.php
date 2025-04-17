@@ -33,11 +33,10 @@ class ContractenQueryController extends Controller
 
         $stations = [];
 
-
         foreach ($queries as $query) {
-            $stations = array_merge($stations, $query->getStations());
+            $stations = array_merge($stations, $query->getStationsFromQuery());
         }
-//        return $stations;
+
         $stationResult = null;
 
         foreach ($stations as $station) {
@@ -45,6 +44,7 @@ class ContractenQueryController extends Controller
                 $stationResult = $station;
             }
         }
+
 
         if ($stationResult == null) return response()->json(null);
 
