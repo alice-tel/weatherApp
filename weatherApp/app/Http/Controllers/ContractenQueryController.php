@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contract;
-use App\Models\CriteriumType;
 use App\Models\NearestLocation;
 use App\Models\Query;
-use App\Models\Station;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Psy\Readline\Hoa\Console;
-use Psy\Util\Json;
 
 class ContractenQueryController extends Controller
 {
-    public function getQuery(int $identifier, int $idQuery)
+    public function getQuery(Request $request, int $identifier, int $idQuery): array
     {
         $query = Query::getQueryFromCompanyAndQueryID($identifier, $idQuery);
-        if ($query == null) return response()->json(null);
-        return $query;
+//        return $query->getStationsQueryString($request->all());
+        return $query->getStationsFromQuery($request->all());
     }
     public function getStationsFromQuery(int $identifier, int $idQuery)
     {

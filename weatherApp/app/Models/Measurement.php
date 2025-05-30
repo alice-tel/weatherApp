@@ -13,6 +13,9 @@ class Measurement extends Model
 
     public $timestamps = false;
 
+    public const TABLE_NAME = 'measurements';
+    public const STATION_NAME = 'station';
+
     protected $fillable = [
         'station',
         'date',

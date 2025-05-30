@@ -36,6 +36,16 @@ class QuerySeeder extends Seeder
                 Query::CONTRACT_ID=>1,
                 Query::DESCRIPTION=>"A test geolocation",
             ],
+            [
+                Query::ID=>10,
+                Query::CONTRACT_ID=>1,
+                Query::DESCRIPTION=>"Get Station With Temperature <15C and argTime=<time<(argTime+60)",
+            ],
+            [
+                Query::ID=>11,
+                Query::CONTRACT_ID=>1,
+                Query::DESCRIPTION=>"Get Station With Humidity of Date",
+            ],
         ]);
     }
 }

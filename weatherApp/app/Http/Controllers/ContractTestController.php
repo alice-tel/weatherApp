@@ -12,7 +12,8 @@ class ContractTestController extends Controller
     public function show()
     {
         $contracts = Query::all();
-        $contract = $contracts->first()->getStationsFromQuery();
+//        $contract = $contracts->first()->getStationsFromQuery();
+        $contract = $contracts[5]->getStationsQueryString(['date' => '2025-05-30', 'time' => '20']);
 
 //        Log::info($contract);
 

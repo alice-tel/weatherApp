@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Helpers\SQLQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,12 +31,12 @@ class Query extends Model
 
     public function getCriteriumGroups(): array
     {
-        return $this->selectCriteriumGroup()->toArray();
+        return self::selectCriteriumGroup($this)->toArray();
     }
 
-    private function selectCriteriumGroup(): Collection
+    public static function selectCriteriumGroup(Query $query): Collection
     {
-        return CriteriumGroup::all()->where(CriteriumGroup::QUERY, $this[self::ID]);
+        return CriteriumGroup::all()->where(CriteriumGroup::QUERY, $query[self::ID]);
     }
     public function addQuery(string $description, int $contractID): Query
     {
@@ -47,44 +48,18 @@ class Query extends Model
         return $query;
     }
 
-    public function getStationsFromQuery(): array
+    public function getStationsFromQuery(array $arg = []): array
     {
-//        $queryResult = DB::select($this->getCompleteQueryString());
-        $queryResult = Station::all()->take(2)->all();
-        $stationInstance = new Station();
-
-        return $queryResult; //$stationInstance::hydrate($queryResult)->all();
+        return DB::select($this->getStationsQueryString($arg));
     }
-
-    public function getCompleteQueryString(): string
+    public function getStationsQueryString(array $arg = []): string
     {
-        $critiriumGroups = $this->selectCriteriumGroup()->all();
-
-        $startQueryString = "SELECT stations.name, stations.longitude, stations.latitude, stations.elevation FROM stations JOIN geolocations ON geolocations.station_name = stations.name JOIN nearest_locations ON nearest_locations.station_name = stations.name WHERE ";
-
-        $whereString = $this->getCompleteWhereClause($critiriumGroups);
-
-        return $startQueryString . $whereString;
+        $critiriumGroups = self::selectCriteriumGroup($this)->all();
+        return SQLQueryBuilder::getCompleteQueryString($critiriumGroups, $arg);
     }
-
-
-    private function getCompleteWhereClause(array $criteriumGroups): string {
-        $whereClause = "";
-        $first = true;
-        usort($criteriumGroups, fn($a, $b) => strcmp($a[CriteriumGroup::GROUP_LEVEL], $b[CriteriumGroup::GROUP_LEVEL]));
-        foreach ($criteriumGroups as $critiriumGroup) {
-            $operator = $critiriumGroup->getOperatorType()->getDescription();
-            $localWhereClause = $critiriumGroup->getWhereClause();
-            $whereClause .= ($first ? "" : " $operator ") . $localWhereClause;
-
-            $first = false;
-        }
-        return $whereClause;
-    }
-
 
     public function getStations(): array {
-        $critiriumGroups = $this->selectCriteriumGroup()->
+        $critiriumGroups = self::selectCriteriumGroup($this)->
         whereIn(CriteriumGroup::TYPE, CriteriumType::getIDWithReferencedTable("stations"))->all();
 
         $stationNames = [];
@@ -119,14 +94,6 @@ class Query extends Model
     {
         Query::where(Query::ID, $this->getKey())->update($columns);
     }
-
-//    public function toJson($options = 0): string
-//    {
-//        $restult = "{";
-//        json_encode($this);
-//
-////        string $result
-//    }
 
     public static function getQueryFromID(int $id): Query {
         return Query::where(Query::ID, $id)->first(); // Query::all()->filter(fn ($query) => $query->getKey() == $id)->first();

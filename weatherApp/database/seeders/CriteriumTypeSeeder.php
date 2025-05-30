@@ -45,6 +45,36 @@ class CriteriumTypeSeeder extends Seeder
                 'description'=>'Regiocode',
                 'referenced_table'=>'nearest_locations',
                 'referenced_field'=>'administrative_region',
+            ],
+            [
+                'id'=>6,
+                'description'=>'Name',
+                'referenced_table'=>'stations',
+                'referenced_field'=>'name',
+            ],
+            [
+                'id'=>7,
+                'description'=>'Temperature',
+                'referenced_table'=>'measurements',
+                'referenced_field'=>'temperature',
+            ],
+            [
+                'id'=>8,
+                'description'=>'Precipitation',
+                'referenced_table'=>'measurements',
+                'referenced_field'=>'precipitation',
+            ],
+            [
+                'id'=>9,
+                'description'=>'Measurements Date',
+                'referenced_table'=>'measurements',
+                'referenced_field'=>'date',
+            ],
+            [
+                'id'=>10,
+                'description'=>'Measurements Time',
+                'referenced_table'=>'measurements',
+                'referenced_field'=>'time',
             ]
          ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Traits\Creator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -84,32 +85,37 @@ class CriteriumGroup extends Model
         CriteriumGroup::where(CriteriumGroup::ID, $this->getKey())->update($columns);
     }
 
-    public function getWhereClause(): string
+    public function getWhereClause(array $args = []): string
     {
         $type = $this->getCriteriumType();
         $searchTable = $type[CriteriumType::REFERENCED_TABLE];
         $searchField = $type[CriteriumType::REFERENCED_FIELD];
         $criteriums = $this->getCriteriums();
 
-        $whereClause = "(";
+        $whereClause = "";
 
         $first = true;
 
         foreach ($criteriums as $criterium) {
             $operator = $criterium->getOperatorType()->getDescription();
-            $type = $criterium[Criterium::VALUE_TYPE];
-            $value = $criterium->getValue();
+            if ($first) $operator = "";
+            $criteriumType = $criterium[Criterium::VALUE_TYPE];
+            $field = $type->getReferencedField();
+            $value = $criterium->getValue() ?? $args[$field];
             $comparison = $criterium->getComparisonType()->getOperator();
 
-            if ($type == Criterium::STRING_VALUE_INDEX) $value = "'$value'";
-            $whereClause .= ($first ? "" : " $operator ")."$searchTable.$searchField"." $comparison ".$value;
+            if ($criteriumType == Criterium::STRING_VALUE_INDEX || $criteriumType == Criterium::ARG_VALUE_INDEX)
+                $value = "'$value'";
+            if ($field == 'time')
+                $value = "time($value)";
+            if (($addVal = $criterium[Criterium::STRING_VALUE]) != null)
+                $value = $field == 'time' ? "($value + time('$addVal'))" : "($value + $addVal)";
+
+            $whereClause = "$whereClause $operator $searchTable.$searchField $comparison $value";
 
             $first = false;
         }
-
-        $whereClause .= ")";
-
-        return $whereClause;
+        return "($whereClause)";
     }
 
 

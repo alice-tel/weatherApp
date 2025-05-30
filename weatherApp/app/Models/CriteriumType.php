@@ -26,6 +26,7 @@ class CriteriumType extends Model
     ];
 
 
+
     public static function getCriteriumTypeWithReferencedTable(string $referencedTable): array
     {
         return CriteriumType::where(CriteriumType::REFERENCED_TABLE, $referencedTable)->getModels();
@@ -38,5 +39,19 @@ class CriteriumType extends Model
 
     public static function getCriteriumTypeFromID(int $id): CriteriumType {
         return CriteriumType::where(CriteriumType::ID, $id)->first();
+    }
+
+    public function getDescription(): string
+    {
+        return $this[self::DESCRIPTION];
+    }
+    public function getReferencedTable(): string
+    {
+        return $this[self::REFERENCED_TABLE];
+    }
+
+    public function getReferencedField(): string
+    {
+        return $this[self::REFERENCED_FIELD];
     }
 }

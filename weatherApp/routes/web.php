@@ -35,6 +35,8 @@ Route::post('/administrator/EditUsers', [AdminController::class, 'updateUsers'])
 Route::get('/contract', [ContractTestController::class, 'show'])->name('contract')->middleware('auth');
 Route::get('/faulty-stations', [FaultyStationsController::class, 'show'])->name('faulty.stations');
 
+Route::get('/test', [ContractTestController::class, 'show']);
+
 Route::get('/about', function () {
     return view('about');
 });

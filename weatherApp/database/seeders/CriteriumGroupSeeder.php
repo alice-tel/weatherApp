@@ -65,6 +65,41 @@ class CriteriumGroupSeeder extends Seeder
                 CriteriumGroup::GROUP_LEVEL=>1,
                 CriteriumGroup::OPERATOR=>1,
             ],
+            [
+                CriteriumGroup::ID=>10,
+                CriteriumGroup::QUERY=>10,
+                CriteriumGroup::TYPE=>7,
+                CriteriumGroup::GROUP_LEVEL=>1,
+                CriteriumGroup::OPERATOR=>1,
+            ],
+            [
+                CriteriumGroup::ID=>11,
+                CriteriumGroup::QUERY=>10,
+                CriteriumGroup::TYPE=>9,
+                CriteriumGroup::GROUP_LEVEL=>2,
+                CriteriumGroup::OPERATOR=>1,
+            ],
+            [
+                CriteriumGroup::ID=>12,
+                CriteriumGroup::QUERY=>10,
+                CriteriumGroup::TYPE=>10,
+                CriteriumGroup::GROUP_LEVEL=>3,
+                CriteriumGroup::OPERATOR=>1,
+            ],
+            [
+                CriteriumGroup::ID=>13,
+                CriteriumGroup::QUERY=>11,
+                CriteriumGroup::TYPE=>8,
+                CriteriumGroup::GROUP_LEVEL=>1,
+                CriteriumGroup::OPERATOR=>1,
+            ],
+            [
+                CriteriumGroup::ID=>14,
+                CriteriumGroup::QUERY=>11,
+                CriteriumGroup::TYPE=>9,
+                CriteriumGroup::GROUP_LEVEL=>2,
+                CriteriumGroup::OPERATOR=>1,
+            ],
         ]);
     }
 }

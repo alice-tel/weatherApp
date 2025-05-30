@@ -22,6 +22,7 @@ class Criterium extends Model
     public const INT_VALUE_INDEX = 0;
     public const STRING_VALUE_INDEX = 1;
     public const FLOAT_VALUE_INDEX = 2;
+    public const ARG_VALUE_INDEX = 3;
 
     protected $table = self::TABLE_NAME;
 
@@ -65,12 +66,13 @@ class Criterium extends Model
     {
         $valueType = $this[Criterium::VALUE_TYPE];
         return match ($valueType) {
-            self::INT_VALUE_INDEX => $this[Criterium::INT_VALUE],
+            self::INT_VALUE_INDEX, null => $this[Criterium::INT_VALUE],
             self::STRING_VALUE_INDEX => $this[Criterium::STRING_VALUE],
             self::FLOAT_VALUE_INDEX => $this[Criterium::FLOAT_VALUE],
-            null => $this[Criterium::INT_VALUE],
+            self::ARG_VALUE_INDEX => null,
         };
     }
+
 
     public static function removeCriterium(int $id): void
     {
