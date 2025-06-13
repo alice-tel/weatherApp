@@ -125,6 +125,36 @@ class CriteriumSeeder extends Seeder
                 Criterium::VALUE_TYPE=>Criterium::ARG_VALUE_INDEX,
                 Criterium::VALUE_COMPARISON=>2,
             ],
+            [
+                Criterium::ID=>14,
+                Criterium::GROUP=>14,
+                Criterium::OPERATOR=>1,
+                Criterium::INT_VALUE=>null,
+                Criterium::STRING_VALUE=>null,
+                Criterium::FLOAT_VALUE=>null,
+                Criterium::VALUE_TYPE=>Criterium::ARG_VALUE_INDEX,
+                Criterium::VALUE_COMPARISON=>1,
+            ],
+            [
+                Criterium::ID=>15,
+                Criterium::GROUP=>13,
+                Criterium::OPERATOR=>2,
+                Criterium::INT_VALUE=>1,
+                Criterium::STRING_VALUE=>null,
+                Criterium::FLOAT_VALUE=>null,
+                Criterium::VALUE_TYPE=>Criterium::INT_VALUE_INDEX,
+                Criterium::VALUE_COMPARISON=>1,
+            ],
+            [
+                Criterium::ID=>16,
+                Criterium::GROUP=>13,
+                Criterium::OPERATOR=>2,
+                Criterium::INT_VALUE=>1,
+                Criterium::STRING_VALUE=>null,
+                Criterium::FLOAT_VALUE=>null,
+                Criterium::VALUE_TYPE=>Criterium::INT_VALUE_INDEX,
+                Criterium::VALUE_COMPARISON=>6,
+            ],
         ]);
     }
 }

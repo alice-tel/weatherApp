@@ -13,7 +13,18 @@ class ContractenQueryController extends Controller
     {
         $query = Query::getQueryFromCompanyAndQueryID($identifier, $idQuery);
 //        return $query->getStationsQueryString($request->all());
-        return $query->getStationsFromQuery($request->all());
+        $stations = $query->getStationsFromQuery($request->all());
+        if ($idQuery == 11){
+            foreach ($stations as $station){
+               $station->humidity = $station->cloud_cover;
+               unset($station->cloud_cover);
+               //just to bring date down again
+                $val = $station->date;
+                unset($station->date);
+                $station->date = $val;
+            }
+        }
+        return $stations;
     }
     public function getStationsFromQuery(int $identifier, int $idQuery)
     {

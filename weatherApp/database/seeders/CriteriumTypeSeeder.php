@@ -60,9 +60,9 @@ class CriteriumTypeSeeder extends Seeder
             ],
             [
                 'id'=>8,
-                'description'=>'Precipitation',
+                'description'=>'Humidity',
                 'referenced_table'=>'measurements',
-                'referenced_field'=>'precipitation',
+                'referenced_field'=>'cloud_cover',
             ],
             [
                 'id'=>9,
