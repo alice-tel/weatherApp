@@ -59,7 +59,7 @@ class  SQLQueryBuilder
 
             $joinClause = " $joinClause JOIN $table ON $table.$stationNameField = $stationTable.$stationName";
         }
-        return " $joinClause JOIN $table ON geolocations.station_name = $stationTable.name";
+        return " $joinClause JOIN geolocations ON geolocations.station_name = $stationTable.name";
     }
 
     private static function getCompleteWhereClause(array $criteriumGroups, array $args = []): string {

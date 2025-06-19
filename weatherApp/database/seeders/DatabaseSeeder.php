@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Geolocation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             CriteriumGroupSeeder::class,
             CriteriumSeeder::class,
             AdminSeeder::class,
+            GeolocationsSeeder::class,
         ]);
 
     }

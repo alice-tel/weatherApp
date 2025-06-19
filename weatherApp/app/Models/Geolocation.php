@@ -9,28 +9,28 @@ class Geolocation extends Model
 {
     use HasFactory;
 
-    protected $table = 'geolocation';
+    protected $table = 'geolocations';
     public $timestamps = false;
 
     protected $fillable = [
         'station_name',
         'country_code',
-        'island',
-        'county',
-        'place',
-        'hamlet',
-        'town',
-        'municipality',
-        'state_district',
-        'administrative',
+//        'island',
+//        'county',
+//        'place',
+//        'hamlet',
+//        'town',
+//        'municipality',
+//        'state_district',
+//        'administrative',
         'state',
-        'village',
-        'region',
-        'province',
-        'city',
-        'locality',
-        'postcode',
-        'country'
+//        'village',
+//        'region',
+//        'province',
+//        'city',
+//        'locality',
+//        'postcode',
+//        'country'
     ];
 
     public function station()
