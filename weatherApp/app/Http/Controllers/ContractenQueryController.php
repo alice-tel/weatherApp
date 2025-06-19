@@ -18,10 +18,6 @@ class ContractenQueryController extends Controller
             foreach ($stations as $station){
                $station->humidity = $station->cloud_cover;
                unset($station->cloud_cover);
-               //just to bring date down again
-                $val = $station->date;
-                unset($station->date);
-                $station->date = $val;
             }
         }
         return $stations;

@@ -155,6 +155,26 @@ class CriteriumSeeder extends Seeder
                 Criterium::VALUE_TYPE=>Criterium::INT_VALUE_INDEX,
                 Criterium::VALUE_COMPARISON=>6,
             ],
+            [
+                Criterium::ID=>17,
+                Criterium::GROUP=>15,
+                Criterium::OPERATOR=>2,
+                Criterium::INT_VALUE=>1,
+                Criterium::STRING_VALUE=>null,
+                Criterium::FLOAT_VALUE=>null,
+                Criterium::VALUE_TYPE=>Criterium::INT_VALUE_INDEX,
+                Criterium::VALUE_COMPARISON=>1,
+            ],
+            [
+                Criterium::ID=>18,
+                Criterium::GROUP=>15,
+                Criterium::OPERATOR=>2,
+                Criterium::INT_VALUE=>1,
+                Criterium::STRING_VALUE=>null,
+                Criterium::FLOAT_VALUE=>null,
+                Criterium::VALUE_TYPE=>Criterium::INT_VALUE_INDEX,
+                Criterium::VALUE_COMPARISON=>6,
+            ],
         ]);
     }
 }

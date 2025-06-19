@@ -14,7 +14,7 @@ class WeatherDataController extends Controller
 {
     public function store(Request $request)
     {
-        Log::info('weather data received', ['data' => $request->all()]);
+//        Log::info('weather data received', ['data' => $request->all()]);
 
         try {
             // log incoming data for debugging

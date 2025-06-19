@@ -3,6 +3,7 @@
 namespace App\Http\Helpers;
 
 use App\Models\CriteriumGroup;
+use App\Models\Geolocation;
 use App\Models\Measurement;
 use App\Models\Query;
 use App\Models\Station;
@@ -27,8 +28,9 @@ class  SQLQueryBuilder
         $stationLong = Station::LONGITUDE;
         $stationLat = Station::LATITUDE;
         $stationEve = Station::ELEVATION;
+        $stationState = "geolocations.state";
 
-        $selectClause = "$stationTable.$stationName, $stationTable.$stationLong, $stationTable.$stationLat, $stationTable.$stationEve";
+        $selectClause = "$stationTable.$stationName, $stationTable.$stationLong, $stationTable.$stationLat, $stationTable.$stationEve, $stationState as location";
 
         foreach ($criteriumGroups as $critiriumGroup) {
             $critiriumType = $critiriumGroup->getCriteriumType();
@@ -57,7 +59,7 @@ class  SQLQueryBuilder
 
             $joinClause = " $joinClause JOIN $table ON $table.$stationNameField = $stationTable.$stationName";
         }
-        return $joinClause;
+        return " $joinClause JOIN $table ON geolocations.station_name = $stationTable.name";
     }
 
     private static function getCompleteWhereClause(array $criteriumGroups, array $args = []): string {

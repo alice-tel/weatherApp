@@ -100,6 +100,13 @@ class CriteriumGroupSeeder extends Seeder
                 CriteriumGroup::GROUP_LEVEL=>2,
                 CriteriumGroup::OPERATOR=>1,
             ],
+            [
+                CriteriumGroup::ID=>15,
+                CriteriumGroup::QUERY=>11,
+                CriteriumGroup::TYPE=>10,
+                CriteriumGroup::GROUP_LEVEL=>3,
+                CriteriumGroup::OPERATOR=>1,
+            ],
         ]);
     }
 }
